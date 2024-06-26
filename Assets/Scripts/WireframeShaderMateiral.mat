@@ -40,10 +40,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WireframeThickness: 0.26
+    - _WireframeThickness: 0.25
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _WireframeColor: {r: 0.23665611, g: 0.9245283, b: 0.18752226, a: 0}
+    - _WireframeColor: {r: 0.12078779, g: 0.9245283, b: 0.013082923, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7426830339097738162
 MonoBehaviour:

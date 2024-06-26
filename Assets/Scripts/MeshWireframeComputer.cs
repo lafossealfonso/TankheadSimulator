@@ -6,11 +6,11 @@ using UnityEngine;
 public class MeshWireframeComputer : MonoBehaviour
 {
     private static Color[] _COLORS = new Color[]
-        {
-            Color.red,
-            Color.green,
-            Color.blue,
-        };
+    {
+        Color.red,
+        Color.green,
+        Color.blue,
+    };
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -23,7 +23,7 @@ public class MeshWireframeComputer : MonoBehaviour
     [ContextMenu("Update Mesh")]
     public void UpdateMesh()
     {
-        if (!gameObject.activeSelf || !GetComponent<MeshRenderer>().enabled)
+        if (!gameObject.activeSelf || !GetComponent<MeshRenderer>().enabled || !GetComponent<SkinnedMeshRenderer>().enabled)
             return;
 
         Mesh m = GetComponent<MeshFilter>().sharedMesh;
@@ -35,6 +35,9 @@ public class MeshWireframeComputer : MonoBehaviour
 
         if (colors != null)
             m.SetColors(colors);
+
+        // Remove the longest side of each triangle
+        _RemoveLongestSides(m);
     }
 
     private Color[] _SortedColoring(Mesh mesh)
@@ -99,4 +102,43 @@ public class MeshWireframeComputer : MonoBehaviour
         return result;
     }
 
+    private void _RemoveLongestSides(Mesh mesh)
+    {
+        List<int> newTriangles = new List<int>();
+        Vector3[] vertices = mesh.vertices;
+        int[] triangles = mesh.triangles;
+
+        for (int i = 0; i < triangles.Length; i += 3)
+        {
+            int v0 = triangles[i];
+            int v1 = triangles[i + 1];
+            int v2 = triangles[i + 2];
+
+            float d0 = Vector3.Distance(vertices[v0], vertices[v1]);
+            float d1 = Vector3.Distance(vertices[v1], vertices[v2]);
+            float d2 = Vector3.Distance(vertices[v2], vertices[v0]);
+
+            if (d0 >= d1 && d0 >= d2)
+            {
+                // Remove side v0-v1
+                newTriangles.Add(v1);
+                newTriangles.Add(v2);
+            }
+            else if (d1 >= d0 && d1 >= d2)
+            {
+                // Remove side v1-v2
+                newTriangles.Add(v2);
+                newTriangles.Add(v0);
+            }
+            else
+            {
+                // Remove side v2-v0
+                newTriangles.Add(v0);
+                newTriangles.Add(v1);
+            }
+        }
+
+        mesh.triangles = newTriangles.ToArray();
+        mesh.RecalculateNormals();
+    }
 }
