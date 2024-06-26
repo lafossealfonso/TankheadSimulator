@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a05b472c275b448bce3f6b143eb90b, type: 3}
+  m_Name: High Range
+  m_EditorClassIdentifier: 
+  weaponName: TYPE 5FA IEYASU
+  range: 200
+  ammunition: 4
+  maxAmmunition: 5
+  reloadTime: 5
+  fireIntervalTime: 1.5
+  damageMin: 70
+  damageMax: 100
+  reloadAlert: 0
+  bulletPrefab: {fileID: 615031328499351571, guid: 889fb5006a62f1f4da2e21224e71caa7,
+    type: 3}

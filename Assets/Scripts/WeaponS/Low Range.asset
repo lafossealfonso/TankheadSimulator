@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a05b472c275b448bce3f6b143eb90b, type: 3}
+  m_Name: Low Range
+  m_EditorClassIdentifier: 
+  weaponName: KORYU A90 GRADE
+  range: 150
+  ammunition: 0
+  maxAmmunition: 45
+  reloadTime: 4
+  fireIntervalTime: 0
+  damageMin: 5
+  damageMax: 30
+  reloadAlert: 1
+  bulletPrefab: {fileID: 615031328499351571, guid: e2ad6e156e3ba284bba09e56ee9c724c,
+    type: 3}
