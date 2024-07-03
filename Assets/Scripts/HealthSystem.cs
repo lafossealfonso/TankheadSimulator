@@ -10,27 +10,26 @@ public class HealthSystem : MonoBehaviour
 
     public bool ifEnemy = false;
 
-    
     private void Start()
     {
         health = maxHealth;
-        
     }
-    // Update is called once per frame
+
     void Update()
     {
-       if(health <= 0)
+        if (health <= 0)
         {
+            Debug.Log(objectName + " has been destroyed.");
             Destroy(gameObject);
-        } 
+        }
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        
+        Debug.Log(objectName + " took " + damage + " damage. Remaining health: " + health);
 
-        if(ifEnemy == true)
+        if (ifEnemy)
         {
             RailTank.Instance.MoveToNewPosition();
         }

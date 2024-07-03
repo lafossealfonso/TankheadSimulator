@@ -51,12 +51,12 @@ public class WeaponUDisplay : MonoBehaviour
         if (WeaponManager.Instance.currentWeaponIndex == slotNumber)
         {
             RectTransform rectTransform = GetComponent<RectTransform>();
-            rectTransform.localScale = new Vector3(1f, 1f, 1f);
+            rectTransform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
         }
         else
         {
             RectTransform rectTransform = GetComponent<RectTransform>();
-            rectTransform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
     }
 
