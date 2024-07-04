@@ -14,7 +14,7 @@ public class TurretTank : MonoBehaviour
     [Header("Movement And Speeds")]
     [Space(2)]
     [SerializeField] private float gunRotateSpeed;
-    [SerializeField] private float movementSpeed = 2f;
+    //[SerializeField] private float movementSpeed = 2f;
 
 
 

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: White Outline Thin
+  m_Name: Yellow Outline
   m_Shader: {fileID: -6465566751694194690, guid: 680caf19764c9634ea83c31164f52013,
     type: 3}
   m_Parent: {fileID: 0}
@@ -38,13 +38,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Keep_Base_Mesh: 1
+    - _Keep_Base_Mesh: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WireframeThickness: 0.55
+    - _WireframeThickness: 1.56
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _WireframeColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _WireframeColor: {r: 1, g: 0.8602982, b: 0.16509432, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7426830339097738162
 MonoBehaviour:

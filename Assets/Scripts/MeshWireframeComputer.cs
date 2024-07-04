@@ -6,16 +6,16 @@ using UnityEngine;
 public class MeshWireframeComputer : MonoBehaviour
 {
     private static Color[] _COLORS = new Color[]
-        {
-            Color.red,
-            Color.green,
-            Color.blue,
-        };
+    {
+        Color.red,
+        Color.green,
+        Color.blue,
+    };
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        // (called whenever the object is updated)
+        // Called whenever the object is updated
         UpdateMesh();
     }
 #endif
@@ -23,18 +23,38 @@ public class MeshWireframeComputer : MonoBehaviour
     [ContextMenu("Update Mesh")]
     public void UpdateMesh()
     {
-        if (!gameObject.activeSelf || !GetComponent<MeshRenderer>().enabled)
+        if (!gameObject.activeSelf)
             return;
 
-        Mesh m = GetComponent<MeshFilter>().sharedMesh;
-        if (m == null) return;
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        SkinnedMeshRenderer skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
 
-        // compute and store vertex colors for the
-        // wireframe shader
-        Color[] colors = _SortedColoring(m);
+        if (meshRenderer == null && skinnedMeshRenderer == null)
+            return;
+
+        if (meshRenderer != null && !meshRenderer.enabled)
+            return;
+
+        if (skinnedMeshRenderer != null && !skinnedMeshRenderer.enabled)
+            return;
+
+        Mesh mesh = null;
+        if (meshRenderer != null)
+        {
+            mesh = GetComponent<MeshFilter>().sharedMesh;
+        }
+        else if (skinnedMeshRenderer != null)
+        {
+            mesh = skinnedMeshRenderer.sharedMesh;
+        }
+
+        if (mesh == null) return;
+
+        // Compute and store vertex colors for the wireframe shader
+        Color[] colors = _SortedColoring(mesh);
 
         if (colors != null)
-            m.SetColors(colors);
+            mesh.SetColors(colors);
     }
 
     private Color[] _SortedColoring(Mesh mesh)
@@ -98,5 +118,4 @@ public class MeshWireframeComputer : MonoBehaviour
         }
         return result;
     }
-
 }
