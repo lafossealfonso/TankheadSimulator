@@ -121,12 +121,12 @@ public class WeaponManager : MonoBehaviour
 
             
 
-            bulletPrefabScript.Setup(shootTargetPosition);
+            bulletPrefabScript.Setup(shootTargetPosition, false);
         }
         else
         {
             Vector3 shootTargetVector = shootTarget.position;
-            bulletPrefabScript.Setup(shootTargetVector);
+            bulletPrefabScript.Setup(shootTargetVector, false);
             Debug.Log("Not shooting raycast");
             currentHealthSystem = null;
         }

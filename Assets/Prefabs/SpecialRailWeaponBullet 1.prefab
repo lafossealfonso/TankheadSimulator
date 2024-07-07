@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 615031328499351571}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 902b654474b73b7439fdc361736992a5, type: 2}
+  - {fileID: 2100000, guid: 409a906f54f18ae48bfca840ac5826bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,9 +117,9 @@ GameObject:
   m_Component:
   - component: {fileID: 615031328499351571}
   - component: {fileID: 3067953674574231824}
-  - component: {fileID: -5349234844924648014}
+  - component: {fileID: -1578069514652292563}
   m_Layer: 0
-  m_Name: LargeBullet
+  m_Name: SpecialRailWeaponBullet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.81, y: 1.81, z: 1.81}
+  m_LocalScale: {x: 1.0148957, y: 1.0148957, z: 1.0148957}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1524753651225835952}
@@ -155,13 +155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRailTank: 0
   isSpecial: 0
-  specialOffset: {x: 0, y: 50, z: 0}
+  specialOffset: {x: 0, y: 20, z: 0}
   specialBulletPrefab: {fileID: 615031328499351571, guid: e2ad6e156e3ba284bba09e56ee9c724c,
     type: 3}
   moveSpeed: 50
-  explosionVFX: {fileID: 9079504692670759629, guid: 8a4f5493fe194bb4b8e65a065045d115,
-    type: 3}
---- !u!135 &-5349234844924648014
+  explosionVFX: {fileID: 400008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}
+--- !u!135 &-1578069514652292563
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,5 +179,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}

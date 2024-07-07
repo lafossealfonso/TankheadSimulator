@@ -25,10 +25,15 @@ public class RailTankSpawner : MonoBehaviour
 
     private void Start()
     {
-        originalPosition = transform.position;
+        originalPosition = railTank.transform.position;
         objectToActivate.SetActive(false); // Ensure the object to activate starts deactivated
         railTankScript.enabled = false;
         textGameObject.SetActive(false);
+
+        tankMovementScript.enabled = false;
+        virtualCamera.m_Lens.NearClipPlane = 155f;
+
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -60,6 +65,12 @@ public class RailTankSpawner : MonoBehaviour
 
     private void Update()
     {
+        if(virtualCamera.m_Lens.NearClipPlane > 0.1f)
+        {
+            virtualCamera.m_Lens.NearClipPlane = Mathf.Lerp(virtualCamera.m_Lens.NearClipPlane, 0.1f, 10f * Time.deltaTime);
+        }
+        else { tankMovementScript.enabled = true; virtualCamera.m_Lens.NearClipPlane = 0.1f; }
+
         if (isActivated)
         {
             // Move the object towards originalPosition at a constant speed

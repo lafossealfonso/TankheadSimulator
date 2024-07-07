@@ -18,6 +18,8 @@ public class WeaponUDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI reloadAlert;
     [SerializeField] Slider reloadTimeSlider;
     [SerializeField] Slider fireTimeSlider;
+    [SerializeField] Image bgImage1;
+    [SerializeField] Image bgImage2;
 
     private float maxFireTime;
     private float maxReloadTime;
@@ -33,7 +35,10 @@ public class WeaponUDisplay : MonoBehaviour
 
     private void Start()
     {
-        thisWeapon = WeaponManager.Instance.GetWeaponOnIndex(slotNumber);
+        if(WeaponManager.Instance.GetWeaponOnIndex(slotNumber) != null)
+        {
+            thisWeapon = WeaponManager.Instance.GetWeaponOnIndex(slotNumber);
+        }
         fireTimeSlider.maxValue = thisWeapon.fireIntervalTime;
         SetupUI();
     }
@@ -41,22 +46,25 @@ public class WeaponUDisplay : MonoBehaviour
 
     private void Update()
     {
-        // Update UI elements
-        reloadAlert.gameObject.SetActive(thisWeapon.reloadAlert);
-        reloadTimeSlider.value = thisWeapon.reloadTime;
-        fireTimeSlider.value = thisWeapon.fireIntervalTime;
-        weaponAmmo.text = thisWeapon.ammunition + " | " + thisWeapon.maxAmmunition + " Rounds";
+        if(thisWeapon!= null)
+        {
+            // Update UI elements
+            reloadAlert.gameObject.SetActive(thisWeapon.reloadAlert);
+            reloadTimeSlider.value = thisWeapon.reloadTime;
+            fireTimeSlider.value = thisWeapon.fireIntervalTime;
+            weaponAmmo.text = thisWeapon.ammunition + " | " + thisWeapon.maxAmmunition + " Rounds";
 
-        // Check if this weapon is currently selected
-        if (WeaponManager.Instance.currentWeaponIndex == slotNumber)
-        {
-            RectTransform rectTransform = GetComponent<RectTransform>();
-            rectTransform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-        }
-        else
-        {
-            RectTransform rectTransform = GetComponent<RectTransform>();
-            rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            // Check if this weapon is currently selected
+            if (WeaponManager.Instance.currentWeaponIndex == slotNumber)
+            {
+                RectTransform rectTransform = GetComponent<RectTransform>();
+                rectTransform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+            }
+            else
+            {
+                RectTransform rectTransform = GetComponent<RectTransform>();
+                rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            }
         }
     }
 

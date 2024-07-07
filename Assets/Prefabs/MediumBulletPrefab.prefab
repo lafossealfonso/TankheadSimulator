@@ -153,7 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c27ebc213765744f8da1f7666af8130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 0
+  isRailTank: 0
+  isSpecial: 0
+  specialOffset: {x: 0, y: 50, z: 0}
+  specialBulletPrefab: {fileID: 615031328499351571, guid: e2ad6e156e3ba284bba09e56ee9c724c,
+    type: 3}
   moveSpeed: 50
   explosionVFX: {fileID: 9079504692670759629, guid: 9cb47d488c3f81643814e05429726795,
     type: 3}

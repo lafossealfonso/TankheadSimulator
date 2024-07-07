@@ -84,13 +84,13 @@ public class TurretTank : MonoBehaviour
             if (hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
             {
                 currentHealthSystem = healthSystem;
-                bulletPrefabScript.Setup(shootTargetPosition);
+                bulletPrefabScript.Setup(shootTargetPosition, false);
             }
 
             else
             {
 
-                bulletPrefabScript.Setup(shootTargetPosition);
+                bulletPrefabScript.Setup(shootTargetPosition, false);
             }
         }
 

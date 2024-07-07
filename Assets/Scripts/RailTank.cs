@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = UnityEngine.Random;
 using Unity.Mathematics;
-using UnityEngine;
 
 public class RailTank : MonoBehaviour
 {
@@ -13,12 +12,10 @@ public class RailTank : MonoBehaviour
     private float currentRotation;
 
     [Header("Movement And Speeds")]
-    [Space(2)]
     [SerializeField] private float gunRotateSpeed;
     [SerializeField] private float movementSpeed = 2f;
 
     [Header("Transform Attributes")]
-    [Space(2)]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform topTankTransform;
     [SerializeField] private Transform shootPointA;
@@ -26,7 +23,6 @@ public class RailTank : MonoBehaviour
     [SerializeField] private Transform particleGroup;
 
     [Header("Miscellaneous")]
-    [Space(2)]
     [SerializeField] private WeaponScriptableObject railWeapon;
     [SerializeField] private LayerMask hittableLayerMask;
 
@@ -39,6 +35,10 @@ public class RailTank : MonoBehaviour
     private Transform currentShootPoint;
 
     public bool playerInProximity = false;
+
+    // New counter and limit for the shots
+    private int shotCounter = 0;
+    [SerializeField] private int shotsBeforeTrue = 5; // Set the desired number of shots before sending true
 
     private void Awake()
     {
@@ -126,22 +126,29 @@ public class RailTank : MonoBehaviour
             if (hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
             {
                 Debug.Log("HealthSystem found on: " + hitObject.name);
-                bulletPrefabScript.Setup(shootTargetPosition);
+                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > (GetComponent<HealthSystem>().maxHealth/2));
             }
             else
             {
                 Debug.LogWarning("HealthSystem not found on: " + hitObject.name);
-                bulletPrefabScript.Setup(shootTargetPosition);
+                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > (GetComponent<HealthSystem>().maxHealth/2));
             }
         }
         else
         {
             Debug.LogWarning("Raycast did not hit anything.");
             Vector3 shootTargetPosition = currentShootPoint.position + shootDir * railWeapon.range;
-            bulletPrefabScript.Setup(shootTargetPosition);
+            bulletPrefabScript.Setup(shootTargetPosition, false);
         }
 
         shootPointBool = !shootPointBool;
+
+        // Increment the shot counter and reset if the limit is reached
+        shotCounter++;
+        if (shotCounter > shotsBeforeTrue)
+        {
+            shotCounter = 0;
+        }
     }
 
     public void DealEnemyDamage()
@@ -182,4 +189,10 @@ public class RailTank : MonoBehaviour
             }
         }
     }
+
+    public Transform GetPlayerTransform()
+    {
+        return lastPlayerTransform;
+    }
+
 }
