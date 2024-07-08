@@ -51,6 +51,7 @@ public class TankMovement : MonoBehaviour
         lookAtChild = lookAtParent.GetChild(0).transform;
         mainCamera = Camera.main;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
 

@@ -14,12 +14,16 @@ public class HealPlayer : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E))
+        if(other.gameObject.tag == "Player")
         {
             text.SetActive(true);
-            playerHealthSystem = other.GetComponent<HealthSystem>();
-            playerHealthSystem.Heal((int)playerHealthSystem.health);
-            Destroy(gameObject);
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                playerHealthSystem = other.GetComponent<HealthSystem>();
+                playerHealthSystem.Heal(healAmount);
+                Destroy(gameObject);
+            }
         }
     }
 

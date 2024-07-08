@@ -23,8 +23,8 @@ public class WeaponManager : MonoBehaviour
     public HealthSystem currentHealthSystem;
 
     [SerializeField] private Transform bulletSpawner;
-    [SerializeField] private Transform shootTarget; 
-    [SerializeField] private LayerMask hittableLayerMask; 
+    [SerializeField] private Transform shootTarget;
+    [SerializeField] private LayerMask hittableLayerMask;
     [SerializeField] private EnemyUIStatus enemyUIStatusScript;
 
     public Animator tankAnimator;
@@ -46,7 +46,7 @@ public class WeaponManager : MonoBehaviour
     {
         ableToAct = true;
 
-        for(int i = 0; i < weaponsList.Count; i++)
+        for (int i = 0; i < weaponsList.Count; i++)
         {
             weaponsList[i].ammunition = weaponsList[i].maxAmmunition;
             weaponsList[i].reloadAlert = false;
@@ -57,26 +57,23 @@ public class WeaponManager : MonoBehaviour
     {
         RotateWeapon();
 
-
         if (currentWeapon.ammunition > 0)
         {
             enoughAmmo = true;
             currentWeapon.reloadAlert = false;
         }
-
-        else if(currentWeapon.ammunition <= 0)
+        else if (currentWeapon.ammunition <= 0)
         {
-            enoughAmmo = false; 
+            enoughAmmo = false;
             currentWeapon.reloadAlert = true;
         }
-        
 
         if (Input.GetMouseButtonDown(0) && ableToAct && enoughAmmo & !currentlyRotating)
         {
             ShootCurrentWeapon();
         }
 
-        if(Input.GetKeyDown(KeyCode.R) && ableToAct)
+        if (Input.GetKeyDown(KeyCode.R) && ableToAct)
         {
             ReloadCurrentGun();
         }
@@ -85,7 +82,6 @@ public class WeaponManager : MonoBehaviour
     private void ReloadCurrentGun()
     {
         ableToAct = false;
-
         StartCoroutine(ReloadGunTimer(currentWeapon.reloadTime));
     }
 
@@ -107,19 +103,16 @@ public class WeaponManager : MonoBehaviour
             Vector3 shootTargetPosition = hit.point;
             GameObject hitObject = hit.collider.gameObject;
 
-            if(hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
+            if (hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
             {
                 currentHealthSystem = healthSystem;
                 enemyUIStatusScript.UpdateValues(currentHealthSystem);
             }
-
             else
             {
                 Debug.Log("resetted current healthSystem");
                 currentHealthSystem = null;
             }
-
-            
 
             bulletPrefabScript.Setup(shootTargetPosition, false);
         }
@@ -136,19 +129,17 @@ public class WeaponManager : MonoBehaviour
 
     public void UpdateUiEnemyStatusValues()
     {
-        if(currentHealthSystem != null)
+        if (currentHealthSystem != null)
         {
             enemyUIStatusScript.UpdateValues(currentHealthSystem);
         }
-        
     }
     public void DealDamage()
     {
-        if(currentHealthSystem != null)
+        if (currentHealthSystem != null)
         {
             currentHealthSystem.TakeDamage(CalculateDamage(currentWeapon.damageMin, currentWeapon.damageMax));
         }
-        
     }
 
     private IEnumerator ResetCanShoot(float intervalTime)
@@ -158,7 +149,7 @@ public class WeaponManager : MonoBehaviour
         while (timer < intervalTime)
         {
             timer += Time.deltaTime;
-            currentWeapon.fireIntervalTime = timer/intervalTime;
+            currentWeapon.fireIntervalTime = timer / intervalTime;
 
             yield return null;
         }
@@ -166,6 +157,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon.fireIntervalTime = startingIntervalTime;
         ableToAct = true;
     }
+
     private IEnumerator ReloadGunTimer(float reloadTime)
     {
         float timer = 0f;
@@ -173,7 +165,7 @@ public class WeaponManager : MonoBehaviour
         while (timer < reloadTime)
         {
             timer += Time.deltaTime;
-            currentWeapon.reloadTime = timer/ reloadTime;
+            currentWeapon.reloadTime = timer / reloadTime;
 
             yield return null;
         }
@@ -187,18 +179,16 @@ public class WeaponManager : MonoBehaviour
     {
         currentWeapon = weaponsList[currentWeaponIndex];
 
-        if(Input.GetKeyDown(KeyCode.Tab) && ableToAct)
+        if (Input.GetKeyDown(KeyCode.Tab) && ableToAct)
         {
-
             currentWeaponIndex++;
 
-            if(currentWeaponIndex >= weaponsList.Count)
+            if (currentWeaponIndex >= weaponsList.Count)
             {
                 currentWeaponIndex = 0;
             }
 
             currentWeapon = weaponsList[currentWeaponIndex];
-
         }
     }
 
@@ -206,7 +196,6 @@ public class WeaponManager : MonoBehaviour
     {
         currentWeapon = passedWeapon;
     }
-
 
     public WeaponScriptableObject GetWeaponOnIndex(int index)
     {
@@ -220,6 +209,4 @@ public class WeaponManager : MonoBehaviour
         int totalDamage = Random.Range(minimumDmg, maxDmg);
         return totalDamage;
     }
-
-
 }

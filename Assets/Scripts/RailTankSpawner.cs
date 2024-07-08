@@ -21,6 +21,7 @@ public class RailTankSpawner : MonoBehaviour
     [SerializeField] private Transform spiderTank;
     [SerializeField] private Transform railTankCameraPosition;
     [SerializeField] private TankMovement tankMovementScript;
+    [SerializeField] private WeaponManager weaponManagerScript;
     private Transform lastCameraPosition;
 
     private void Start()
@@ -32,6 +33,7 @@ public class RailTankSpawner : MonoBehaviour
 
         tankMovementScript.enabled = false;
         virtualCamera.m_Lens.NearClipPlane = 155f;
+        weaponManagerScript.enabled = false;
 
 
     }
@@ -69,7 +71,7 @@ public class RailTankSpawner : MonoBehaviour
         {
             virtualCamera.m_Lens.NearClipPlane = Mathf.Lerp(virtualCamera.m_Lens.NearClipPlane, 0.1f, 10f * Time.deltaTime);
         }
-        else { tankMovementScript.enabled = true; virtualCamera.m_Lens.NearClipPlane = 0.1f; }
+        else { tankMovementScript.enabled = true; virtualCamera.m_Lens.NearClipPlane = 0.1f; weaponManagerScript.enabled = true; }
 
         if (isActivated)
         {
