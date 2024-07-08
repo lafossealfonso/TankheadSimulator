@@ -126,12 +126,12 @@ public class RailTank : MonoBehaviour
             if (hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
             {
                 Debug.Log("HealthSystem found on: " + hitObject.name);
-                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > (GetComponent<HealthSystem>().maxHealth/2));
+                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > GetComponent<HealthSystem>().maxHealth);
             }
             else
             {
                 Debug.LogWarning("HealthSystem not found on: " + hitObject.name);
-                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > (GetComponent<HealthSystem>().maxHealth/2));
+                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > (GetComponent<HealthSystem>().maxHealth / 2));
             }
         }
         else

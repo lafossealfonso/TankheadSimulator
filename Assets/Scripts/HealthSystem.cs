@@ -34,4 +34,13 @@ public class HealthSystem : MonoBehaviour
             RailTank.Instance.MoveToNewPosition();
         }
     }
+
+    public void Heal(int healAmount)
+    {
+        health += healAmount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
 }

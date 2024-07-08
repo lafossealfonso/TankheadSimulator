@@ -42,7 +42,7 @@ public class RailTankSpawner : MonoBehaviour
         {
             textGameObject.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 // Activate the object above its original position
                 objectToActivate.transform.position = originalPosition + Vector3.up * height;

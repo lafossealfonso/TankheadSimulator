@@ -46,7 +46,12 @@ public class WeaponUDisplay : MonoBehaviour
 
     private void Update()
     {
-        if(thisWeapon!= null)
+        if (WeaponManager.Instance.GetWeaponOnIndex(slotNumber) != null)
+        {
+            thisWeapon = WeaponManager.Instance.GetWeaponOnIndex(slotNumber);
+        }
+
+        if (thisWeapon!= null)
         {
             // Update UI elements
             reloadAlert.gameObject.SetActive(thisWeapon.reloadAlert);
