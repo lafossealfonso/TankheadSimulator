@@ -20467,7 +20467,7 @@ MonoBehaviour:
     m_Bits: 72
   currentHealthSystem: {fileID: 0}
   playerInProximity: 0
-  shotsBeforeTrue: 5
+  shotsBeforeTrue: 20
 --- !u!65 &7132126750888548792
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20483,12 +20483,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.33, y: 6.14, z: 1.82}
-  m_Center: {x: 0.19, y: 1.88, z: 77.02}
+  m_Size: {x: 5.733567, y: 6.4929333, z: 4.1921387}
+  m_Center: {x: -0.025620623, y: 2.056466, z: 75.83412}
 --- !u!114 &7761322892322238399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20503,7 +20503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: PanzerKopf
   health: 0
-  maxHealth: 500
+  maxHealth: 750
   ifEnemy: 1
 --- !u!1 &7534059231621521819
 GameObject:

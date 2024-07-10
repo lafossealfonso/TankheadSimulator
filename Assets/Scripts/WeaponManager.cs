@@ -106,7 +106,6 @@ public class WeaponManager : MonoBehaviour
             if (hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
             {
                 currentHealthSystem = healthSystem;
-                enemyUIStatusScript.UpdateValues(currentHealthSystem);
             }
             else
             {
@@ -139,7 +138,12 @@ public class WeaponManager : MonoBehaviour
         if (currentHealthSystem != null)
         {
             currentHealthSystem.TakeDamage(CalculateDamage(currentWeapon.damageMin, currentWeapon.damageMax));
+            Debug.Log("DEALING TONS OF DAMAGE");
+
+            enemyUIStatusScript.UpdateValues(currentHealthSystem);
         }
+
+        else { Debug.Log("Current Health system null"); }
     }
 
     private IEnumerator ResetCanShoot(float intervalTime)
@@ -179,7 +183,7 @@ public class WeaponManager : MonoBehaviour
     {
         currentWeapon = weaponsList[currentWeaponIndex];
 
-        if (Input.GetKeyDown(KeyCode.Tab) && ableToAct)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && ableToAct)
         {
             currentWeaponIndex++;
 
@@ -200,7 +204,6 @@ public class WeaponManager : MonoBehaviour
     public WeaponScriptableObject GetWeaponOnIndex(int index)
     {
         WeaponScriptableObject weaponOnIndex = weaponsList[index];
-        Debug.Log(weaponOnIndex.name);
         return weaponOnIndex;
     }
 

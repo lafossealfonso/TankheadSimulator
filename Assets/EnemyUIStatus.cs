@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,39 +12,27 @@ public class EnemyUIStatus : MonoBehaviour
     [SerializeField] TextMeshProUGUI enemyHealthStatus;
     [SerializeField] Slider enemyHealthSlider;
 
-    private HealthSystem healthSystem;
+    public HealthSystem healthSystem;
     private bool thereIsEnemy;
 
     private void Update()
     {
-        if (WeaponManager.Instance.currentHealthSystem != null)
-        {
-            //healthSystem = WeaponManager.Instance.currentHealthSystem;
-        }
-
-        if(WeaponManager.Instance.currentHealthSystem != null)
-        {
-            thereIsEnemy = true;
-        }
-
-        else
-        {
-            thereIsEnemy = false;
-        }
 
         ActivateObjects();
+        enemyHealthStatus.text = ("Enemy Armour at " + Mathf.RoundToInt(healthSystem.health / healthSystem.maxHealth * 100f) + "% ");
+
     }
 
     private void ActivateObjects()
     {
-        parentObject.SetActive(thereIsEnemy);
+        parentObject.SetActive(true);
     }
 
     public void UpdateValues(HealthSystem healthySystem)
     {
+        healthSystem = healthySystem;
         enemyName.text = healthySystem.objectName;
         enemyHealthStatus.text = ("Enemy Armour at " + Mathf.RoundToInt(healthySystem.health / healthySystem.maxHealth * 100f)  + "% ");
-        //enemyHealthStatus.text = ("Enemy Armour at " + healthySystem.health + "/" + healthySystem.maxHealth + "% ");
         enemyHealthSlider.value = Mathf.RoundToInt(healthySystem.health / healthySystem.maxHealth * 100);
         
     }

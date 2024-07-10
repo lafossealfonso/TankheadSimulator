@@ -50,8 +50,7 @@ public class TankMovement : MonoBehaviour
         initialOffset = tankTopParent.position - transform.position;
         lookAtChild = lookAtParent.GetChild(0).transform;
         mainCamera = Camera.main;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        
 
     }
 
@@ -170,6 +169,5 @@ public class TankMovement : MonoBehaviour
         float shootRange = WeaponManager.Instance.currentWeapon.range;
         Vector3 newPosition = lookAtParent.position + (lookAtParent.forward * shootRange);
         lookAtChild.position = newPosition;
-        Debug.Log(shootRange);
     }
 }

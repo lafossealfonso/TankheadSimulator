@@ -35,6 +35,9 @@ public class RailTankSpawner : MonoBehaviour
         virtualCamera.m_Lens.NearClipPlane = 155f;
         weaponManagerScript.enabled = false;
 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
 
     }
 

@@ -27,7 +27,6 @@ public class BulletPrefabScript : MonoBehaviour
             this.targetPosition = targetPosition;
         }
         readyToGo = true;
-        Debug.Log("Bullet setup with target position: " + targetPosition);
     }
 
     private void Update()
@@ -53,12 +52,15 @@ public class BulletPrefabScript : MonoBehaviour
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
         if (distanceToTarget < 0.5f) // Adjust this threshold as needed
         {
-            Debug.Log("Bullet reached target position.");
             Instantiate(explosionVFX, transform.position, Quaternion.identity);
             if (isRailTank && nearTarget)
             {
-                Debug.Log("Bullet hit the target and is dealing damage.");
                 RailTank.Instance.DealEnemyDamage();
+            }
+
+            else
+            {
+                WeaponManager.Instance.DealDamage();
             }
             Destroy(gameObject);
         }
@@ -73,12 +75,12 @@ public class BulletPrefabScript : MonoBehaviour
         float distanceToSpecialTarget = Vector3.Distance(transform.position, specialTargetPosition);
         if (distanceToSpecialTarget < 0.5f) // Adjust this threshold as needed
         {
-            Debug.Log("Bullet reached special target position.");
+            
             Instantiate(explosionVFX, transform.position, Quaternion.identity);
 
             // Instantiate 5 bullets aimed at an area around the original target
-            int bulletCount = 20;
-            float spreadRadius = 15f; // Adjust the spread radius as needed
+            int bulletCount = 5;
+            float spreadRadius = 5f; // Adjust the spread radius as needed
             for (int i = 0; i < bulletCount; i++)
             {
                 Vector3 randomOffset = new Vector3(Random.Range(-spreadRadius, spreadRadius), 0, Random.Range(-spreadRadius, spreadRadius));
@@ -107,13 +109,21 @@ public class BulletPrefabScript : MonoBehaviour
             }
             Destroy(gameObject); // Destroy bullet on hit
         }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Entered trigger of enemy");
+            nearTarget = true;
+            WeaponManager.Instance.DealDamage(); //deals damage to the enemy
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player")) // Ensure the player's tag is set correctly
         {
-            nearTarget = false;
+            nearTarget = false; 
         }
     }
 }

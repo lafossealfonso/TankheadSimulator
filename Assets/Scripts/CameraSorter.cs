@@ -18,7 +18,7 @@ public class CameraSorter : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // Right click
+        if (Input.GetKeyDown(KeyCode.Tab)) // Right click
         {
             SwitchCamera();
         }

@@ -194,5 +194,13 @@ public class RailTank : MonoBehaviour
     {
         return lastPlayerTransform;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Bullet")
+        {
+            Debug.LogWarning("Bullet detected on Rail Tank");
+            WeaponManager.Instance.DealDamage();
+        }
+    }
 
 }
