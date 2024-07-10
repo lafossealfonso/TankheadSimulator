@@ -17,7 +17,7 @@ MonoBehaviour:
   ammunition: 3
   maxAmmunition: 5
   reloadTime: 5
-  fireIntervalTime: 1000
+  fireIntervalTime: 1
   damageMin: 30
   damageMax: 70
   reloadAlert: 0

@@ -7,6 +7,7 @@ public class BulletPrefabScript : MonoBehaviour
     private bool readyToGo = false;
     private Vector3 targetPosition;
     public bool isRailTank = false;
+    //public bool isPlayerTank = false;
     public bool isSpecial = false;
     [SerializeField] private Vector3 specialOffset;
     [SerializeField] private Transform specialBulletPrefab;
@@ -106,8 +107,9 @@ public class BulletPrefabScript : MonoBehaviour
             {
                 Debug.Log("Calling DealEnemyDamage from BulletPrefabScript");
                 RailTank.Instance.DealEnemyDamage();
+                Destroy(gameObject); // Destroy bullet on hit
             }
-            Destroy(gameObject); // Destroy bullet on hit
+            
         }
 
         if (other.gameObject.CompareTag("Enemy"))

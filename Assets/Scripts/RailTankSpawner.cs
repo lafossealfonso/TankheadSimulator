@@ -14,7 +14,6 @@ public class RailTankSpawner : MonoBehaviour
     [SerializeField] private GameObject textGameObject;
 
     [Header("Camera Settings")]
-
     [SerializeField] private Transform mainCameraTransform;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Transform railTank;
@@ -37,8 +36,6 @@ public class RailTankSpawner : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-
     }
 
     private void OnTriggerStay(Collider other)
@@ -62,7 +59,6 @@ public class RailTankSpawner : MonoBehaviour
         }
     }
 
-
     private void OnTriggerExit(Collider other)
     {
         textGameObject.SetActive(false);
@@ -70,11 +66,7 @@ public class RailTankSpawner : MonoBehaviour
 
     private void Update()
     {
-        if(virtualCamera.m_Lens.NearClipPlane > 0.1f)
-        {
-            virtualCamera.m_Lens.NearClipPlane = Mathf.Lerp(virtualCamera.m_Lens.NearClipPlane, 0.1f, 10f * Time.deltaTime);
-        }
-        else { tankMovementScript.enabled = true; virtualCamera.m_Lens.NearClipPlane = 0.1f; weaponManagerScript.enabled = true; }
+        UpdateCameraNearClipPlane();
 
         if (isActivated)
         {
@@ -89,9 +81,27 @@ public class RailTankSpawner : MonoBehaviour
                 isActivated = false;
 
                 StartCoroutine(WaitFor(2f));
-                
             }
         }
+    }
+
+    private void UpdateCameraNearClipPlane()
+    {
+        if (virtualCamera.m_Lens.NearClipPlane > 10f)
+        {
+            virtualCamera.m_Lens.NearClipPlane = Mathf.Lerp(virtualCamera.m_Lens.NearClipPlane, 1f, 0.5f * Time.deltaTime);
+        }
+        else
+        {
+            EnableScripts();
+        }
+    }
+
+    private void EnableScripts()
+    {
+        tankMovementScript.enabled = true;
+        weaponManagerScript.enabled = true;
+        virtualCamera.m_Lens.NearClipPlane = 0.1f;
     }
 
     private IEnumerator WaitFor(float seconds)
@@ -101,7 +111,7 @@ public class RailTankSpawner : MonoBehaviour
         tankMovementScript.enabled = true;
         virtualCamera.m_Follow = spiderTank;
         virtualCamera.m_LookAt = spiderTank;
-        mainCameraTransform = lastCameraPosition;
+        mainCameraTransform.position = lastCameraPosition.position;
         Destroy(gameObject);
     }
 }

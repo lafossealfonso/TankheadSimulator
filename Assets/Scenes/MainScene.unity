@@ -12361,16 +12361,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_temple (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3469015517558172918, guid: 97a97f5f9ac3dbe4eada6776c207024b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550170237898747683, guid: 97a97f5f9ac3dbe4eada6776c207024b,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4282848029325604428, guid: 97a97f5f9ac3dbe4eada6776c207024b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13972,8 +13962,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.59, y: 1.6, z: 3.04}
-  m_Center: {x: 0, y: -0.29, z: 0}
+  m_Size: {x: 2.5109117, y: 2.3816042, z: 2.3602798}
+  m_Center: {x: 0.01328725, y: 0.10080179, z: -0.33986044}
 --- !u!1 &1454915601
 GameObject:
   m_ObjectHideFlags: 0
@@ -31657,7 +31647,7 @@ Transform:
   m_GameObject: {fileID: 6987385637310919625}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.18, z: 4.55}
+  m_LocalPosition: {x: 0, y: 0.18, z: 3.9}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -33465,6 +33455,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 3816224241867938912}
+    - target: {fileID: 6838257859990319325, guid: 84f23452a34a0da4e839fed4923bf4aa,
+        type: 3}
+      propertyPath: shotsBeforeTrue
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6838257859990319325, guid: 84f23452a34a0da4e839fed4923bf4aa,
         type: 3}
       propertyPath: currentHealthSystem

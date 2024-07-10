@@ -21,6 +21,11 @@ public class MeshWireframeComputer : MonoBehaviour
 #endif
 
     [ContextMenu("Update Mesh")]
+
+    private void Awake()
+    {
+        UpdateMesh();
+    }
     public void UpdateMesh()
     {
         if (!gameObject.activeSelf)
