@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -29,6 +29,11 @@ public class MenuSelection : MonoBehaviour
             if(yes == false)
             {
                 Application.Quit();
+            }
+
+            else
+            {
+                SceneManager.LoadScene("MainScene");
             }
         }
     }
