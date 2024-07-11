@@ -49,6 +49,7 @@ public class BulletPrefabScript : MonoBehaviour
     {
         Vector3 moveDir = (targetPosition - transform.position).normalized;
         transform.position += moveDir * moveSpeed * Time.deltaTime;
+        transform.LookAt(targetPosition);
 
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
         if (distanceToTarget < 0.5f) // Adjust this threshold as needed
@@ -72,6 +73,8 @@ public class BulletPrefabScript : MonoBehaviour
         Vector3 specialTargetPosition = targetPosition + specialOffset;
         Vector3 moveDir = (specialTargetPosition - transform.position).normalized;
         transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+        transform.LookAt(targetPosition);
 
         float distanceToSpecialTarget = Vector3.Distance(transform.position, specialTargetPosition);
         if (distanceToSpecialTarget < 0.5f) // Adjust this threshold as needed
@@ -116,6 +119,7 @@ public class BulletPrefabScript : MonoBehaviour
         {
             Debug.Log("Entered trigger of enemy");
             nearTarget = true;
+            WeaponManager.Instance.currentHealthSystem = other.gameObject.GetComponent<HealthSystem>();
             WeaponManager.Instance.DealDamage(); //deals damage to the enemy
         }
 

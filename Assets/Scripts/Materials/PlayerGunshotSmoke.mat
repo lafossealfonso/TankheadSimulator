@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Smoke Outline
+  m_Name: PlayerGunshotSmoke
   m_Shader: {fileID: -6465566751694194690, guid: 680caf19764c9634ea83c31164f52013,
     type: 3}
   m_Parent: {fileID: 0}
@@ -44,7 +44,7 @@ Material:
     - _WireframeThickness: 0.92
     m_Colors:
     - _BaseColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
-    - _WireframeColor: {r: 1, g: 0.027940515, b: 0, a: 0}
+    - _WireframeColor: {r: 0.0966053, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7426830339097738162
 MonoBehaviour:

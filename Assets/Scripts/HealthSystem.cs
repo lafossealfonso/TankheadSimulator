@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class HealthSystem : MonoBehaviour
             Debug.Log(objectName + " has been destroyed.");
             Destroy(gameObject);
         }
+
+        if (health <= 0 && !ifEnemy) { SceneManager.LoadScene("MenuScene"); }
     }
 
     public void TakeDamage(int damage)

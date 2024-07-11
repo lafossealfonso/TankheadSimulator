@@ -28,7 +28,8 @@ public class RailTank : MonoBehaviour
 
     private Transform lastPlayerTransform;
 
-    [SerializeField] private HealthSystem currentHealthSystem; // Assigned in the inspector
+    [SerializeField] private HealthSystem currentHealthSystem; 
+    [SerializeField] private HealthSystem ownHealthSystem; // Assigned in the inspector
 
     private bool isMoving;
     private bool shootPointBool;
@@ -126,12 +127,12 @@ public class RailTank : MonoBehaviour
             if (hitObject.TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
             {
                 Debug.Log("HealthSystem found on: " + hitObject.name);
-                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > GetComponent<HealthSystem>().maxHealth);
+                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && ownHealthSystem.health < ownHealthSystem.maxHealth);
             }
             else
             {
                 Debug.LogWarning("HealthSystem not found on: " + hitObject.name);
-                bulletPrefabScript.Setup(shootTargetPosition, shotCounter >= shotsBeforeTrue && GetComponent<HealthSystem>().health > (GetComponent<HealthSystem>().maxHealth / 2));
+                bulletPrefabScript.Setup(shootTargetPosition, false);
             }
         }
         else
@@ -150,6 +151,7 @@ public class RailTank : MonoBehaviour
             shotCounter = 0;
         }
     }
+
 
     public void DealEnemyDamage()
     {
@@ -193,14 +195,6 @@ public class RailTank : MonoBehaviour
     public Transform GetPlayerTransform()
     {
         return lastPlayerTransform;
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Bullet")
-        {
-            Debug.LogWarning("Bullet detected on Rail Tank");
-            WeaponManager.Instance.DealDamage();
-        }
     }
 
 }

@@ -17,9 +17,9 @@ MonoBehaviour:
   ammunition: 3
   maxAmmunition: 5
   reloadTime: 5
-  fireIntervalTime: 1
-  damageMin: 30
-  damageMax: 70
+  fireIntervalTime: 1.5
+  damageMin: 10
+  damageMax: 50
   reloadAlert: 0
   bulletPrefab: {fileID: 615031328499351571, guid: c322283614deb4e4e910ec5ac162581e,
     type: 3}

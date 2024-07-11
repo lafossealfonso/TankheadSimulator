@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a05b472c275b448bce3f6b143eb90b, type: 3}
   m_Name: Medium Range
   m_EditorClassIdentifier: 
-  weaponName: GOSUTOKANI MACH II
-  range: 50
-  ammunition: 12
+  weaponName: GOSUTO STANDARD
+  range: 250
+  ammunition: 20
   maxAmmunition: 20
   reloadTime: 3
   fireIntervalTime: 0.43573007

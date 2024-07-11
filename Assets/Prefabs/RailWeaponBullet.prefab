@@ -155,11 +155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRailTank: 0
   isSpecial: 0
-  specialOffset: {x: 0, y: 40, z: 0}
+  specialOffset: {x: 0, y: 100, z: 0}
   specialBulletPrefab: {fileID: 615031328499351571, guid: 154b3222a849b1342b6e9786d621747d,
     type: 3}
   moveSpeed: 50
-  explosionVFX: {fileID: 400008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}
+  explosionVFX: {fileID: 680161747076128824, guid: 12bcf497de2f64340a360adef6c9faf7,
+    type: 3}
 --- !u!135 &-1578069514652292563
 SphereCollider:
   m_ObjectHideFlags: 0

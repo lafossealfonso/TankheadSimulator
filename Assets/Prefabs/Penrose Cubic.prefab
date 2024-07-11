@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dd41c47ed35ac40ae05dc5ab0108a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 80
+  healAmount: 200
   text: {fileID: 8866131115784067445}
 --- !u!1 &4291214332787649199
 GameObject:

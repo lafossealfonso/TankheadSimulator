@@ -10,6 +10,8 @@ public class PlayerHealthUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerHealthStatus;
     [SerializeField] GameObject lowHealthAlert;
     [SerializeField] HealthSystem playerHealthSystem;
+    [SerializeField] GameObject burstReady;
+    [SerializeField] TankMovement tankMovementScript;
 
 
     private void Update()
@@ -26,5 +28,7 @@ public class PlayerHealthUI : MonoBehaviour
         {
             lowHealthAlert.SetActive(false);    
         }
+
+        burstReady.SetActive(!tankMovementScript.isBurstOnCooldown);
     }
 }

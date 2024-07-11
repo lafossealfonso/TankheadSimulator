@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a05b472c275b448bce3f6b143eb90b, type: 3}
   m_Name: Low Range
   m_EditorClassIdentifier: 
-  weaponName: KORYU A90 GRADE
-  range: 150
-  ammunition: 0
+  weaponName: KORYU A90 RAPID
+  range: 200
+  ammunition: 30
   maxAmmunition: 45
   reloadTime: 4
   fireIntervalTime: 0
   damageMin: 5
   damageMax: 30
-  reloadAlert: 1
+  reloadAlert: 0
   bulletPrefab: {fileID: 615031328499351571, guid: e2ad6e156e3ba284bba09e56ee9c724c,
     type: 3}

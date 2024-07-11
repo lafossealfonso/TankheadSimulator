@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Cinemachine;
 
 public class TankMovement : MonoBehaviour
 {
@@ -10,8 +12,14 @@ public class TankMovement : MonoBehaviour
     [SerializeField] private float lookRotationSpeed = 1f;
     [SerializeField] private float tankRotationSpeed = 5f;
     [SerializeField] private float tankMoveSpeed = 100f;
+    [SerializeField] private float tankDashSpeed = 100f;
+    [SerializeField] private float tankBurstSpeed = 100f;
+    [SerializeField] private float burstDuration = 0.1f;
     [SerializeField] private float gunRotateSpeed = 5f;
     [SerializeField] private float raycastAndTankOffset;
+    [SerializeField] private float burstCooldown;
+    private float originalTankSpeed;
+    public bool isBurstOnCooldown = false;
 
     [Header("Transform Attributes")]
     [Space(2)]
@@ -30,6 +38,7 @@ public class TankMovement : MonoBehaviour
     public Leg[] legArray;
     [SerializeField] private float normalSpeed;
     [SerializeField] private float sprintSpeed;
+    [SerializeField] private float burstSpeed;
 
     [Header("Layer Masks")]
     [Space(2)]
@@ -40,6 +49,7 @@ public class TankMovement : MonoBehaviour
     private Vector3 initialOffset;
     
     private Camera mainCamera;
+    private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     private void Awake()
     {
@@ -50,6 +60,7 @@ public class TankMovement : MonoBehaviour
         initialOffset = tankTopParent.position - transform.position;
         lookAtChild = lookAtParent.GetChild(0).transform;
         mainCamera = Camera.main;
+        originalTankSpeed = tankMoveSpeed;
         
 
     }
@@ -119,11 +130,24 @@ public class TankMovement : MonoBehaviour
 
     private void MoveTank()
     {
-
         bool isDashing = Input.GetKey(KeyCode.LeftShift);
+        if (Input.GetKeyDown(KeyCode.Space) && !isBurstOnCooldown)
+        {
+            StartCoroutine(DashBurst());
+        }
+
+        else
+        {
+            foreach (Leg leg in legArray)
+            {
+                leg.travelSpeed = normalSpeed;
+            }
+        }
+
         Booster1.gameObject.SetActive(isDashing);
         Booster2.gameObject.SetActive(isDashing);
 
+        // Adjust Y position based on terrain
         RaycastHit hit;
         if (Physics.Raycast(raycastToTerrain.position, Vector3.down, out hit, 20f, terrainLayer))
         {
@@ -131,13 +155,14 @@ public class TankMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, newY, transform.position.z);
         }
 
+        // Handle movement and speed
+        float accelerationInput = Input.GetAxis("Vertical");
 
         if (isDashing && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
         {
-            Vector3 dashDirection = transform.forward * tankMoveSpeed * 2f * Time.deltaTime;
-
-            transform.Translate(dashDirection, Space.World);
-            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 68f, 10f * Time.deltaTime);
+            transform.Translate(Vector3.forward * accelerationInput * tankDashSpeed * Time.deltaTime);
+            cinemachineVirtualCamera.m_Lens.FieldOfView = 50f;
+            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 120f, 10f * Time.deltaTime);
 
             foreach (Leg leg in legArray)
             {
@@ -147,14 +172,31 @@ public class TankMovement : MonoBehaviour
         else
         {
 
-            float accelerationInput = Input.GetAxis("Vertical");
+            accelerationInput = Input.GetAxis("Vertical");
             transform.Translate(Vector3.forward * accelerationInput * tankMoveSpeed * Time.deltaTime);
+            cinemachineVirtualCamera.m_Lens.FieldOfView = 33f;
             mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 60f, 10f * Time.deltaTime);
             foreach (Leg leg in legArray)
             {
                 leg.travelSpeed = normalSpeed;
             }
         }
+    }
+
+    private IEnumerator DashBurst()
+    {
+        isBurstOnCooldown = true;
+        foreach (Leg leg in legArray)
+        {
+            leg.travelSpeed = burstSpeed;
+        }
+        float originalSpeed = tankMoveSpeed;
+        tankMoveSpeed = tankBurstSpeed; // Set this to your desired burst speed
+        yield return new WaitForSeconds(burstDuration); // Set burstTime to the duration of the burst
+        tankMoveSpeed = originalSpeed;
+
+        yield return new WaitForSeconds(burstCooldown); // Set burstCooldown to the duration of the cooldown
+        isBurstOnCooldown = false;
     }
 
     private void RotateTank()

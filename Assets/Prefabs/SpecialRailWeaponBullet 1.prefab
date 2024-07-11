@@ -159,7 +159,8 @@ MonoBehaviour:
   specialBulletPrefab: {fileID: 615031328499351571, guid: e2ad6e156e3ba284bba09e56ee9c724c,
     type: 3}
   moveSpeed: 50
-  explosionVFX: {fileID: 400008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}
+  explosionVFX: {fileID: 680161747076128824, guid: 12bcf497de2f64340a360adef6c9faf7,
+    type: 3}
 --- !u!135 &-1578069514652292563
 SphereCollider:
   m_ObjectHideFlags: 0
