@@ -49,7 +49,7 @@ public class TankMovement : MonoBehaviour
     private Vector3 initialOffset;
     
     private Camera mainCamera;
-    private CinemachineVirtualCamera cinemachineVirtualCamera;
+    [SerializeField]private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     private void Awake()
     {
@@ -131,7 +131,7 @@ public class TankMovement : MonoBehaviour
     private void MoveTank()
     {
         bool isDashing = Input.GetKey(KeyCode.LeftShift);
-        if (Input.GetKeyDown(KeyCode.Space) && !isBurstOnCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && !isBurstOnCooldown && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
         {
             StartCoroutine(DashBurst());
         }
@@ -161,8 +161,8 @@ public class TankMovement : MonoBehaviour
         if (isDashing && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
         {
             transform.Translate(Vector3.forward * accelerationInput * tankDashSpeed * Time.deltaTime);
-            cinemachineVirtualCamera.m_Lens.FieldOfView = 50f;
-            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 120f, 10f * Time.deltaTime);
+            cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, 38f, 10f * Time.deltaTime);
+           // mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 1f, 10f * Time.deltaTime);
 
             foreach (Leg leg in legArray)
             {
@@ -174,8 +174,8 @@ public class TankMovement : MonoBehaviour
 
             accelerationInput = Input.GetAxis("Vertical");
             transform.Translate(Vector3.forward * accelerationInput * tankMoveSpeed * Time.deltaTime);
-            cinemachineVirtualCamera.m_Lens.FieldOfView = 33f;
-            mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 60f, 10f * Time.deltaTime);
+            cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, 33f, 10f * Time.deltaTime);
+            //mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, 60f, 10f * Time.deltaTime);
             foreach (Leg leg in legArray)
             {
                 leg.travelSpeed = normalSpeed;

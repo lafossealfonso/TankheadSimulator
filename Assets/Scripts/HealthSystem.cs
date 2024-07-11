@@ -21,10 +21,11 @@ public class HealthSystem : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log(objectName + " has been destroyed.");
+            health = 0;
             Destroy(gameObject);
         }
 
-        if (health <= 0 && !ifEnemy) { SceneManager.LoadScene("MenuScene"); }
+        if (health <= 0 && !ifEnemy) { health = 0; SceneManager.LoadScene("MenuScene"); }
     }
 
     public void TakeDamage(int damage)

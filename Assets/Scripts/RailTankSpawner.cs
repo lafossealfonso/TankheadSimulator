@@ -31,7 +31,7 @@ public class RailTankSpawner : MonoBehaviour
         textGameObject.SetActive(false);
 
         tankMovementScript.enabled = false;
-        virtualCamera.m_Lens.NearClipPlane = 155f;
+        virtualCamera.m_Lens.NearClipPlane = 220f;
         weaponManagerScript.enabled = false;
 
         Cursor.visible = false;
@@ -89,7 +89,7 @@ public class RailTankSpawner : MonoBehaviour
     {
         if (virtualCamera.m_Lens.NearClipPlane > 10f)
         {
-            virtualCamera.m_Lens.NearClipPlane = Mathf.Lerp(virtualCamera.m_Lens.NearClipPlane, 1f, 0.5f * Time.deltaTime);
+            virtualCamera.m_Lens.NearClipPlane = Mathf.Lerp(virtualCamera.m_Lens.NearClipPlane, 0.1f, 0.5f * Time.deltaTime);
         }
         else
         {
